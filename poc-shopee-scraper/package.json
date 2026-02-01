@@ -1,0 +1,21 @@
+{
+  "name": "poc-shopee-scraper",
+  "version": "1.0.0",
+  "description": "POC for Shopee Scraper validation",
+  "main": "src/scraper.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/scraper.js",
+    "health-check": "node src/health-check.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.0",
+    "express": "^5.2.1",
+    "playwright": "^1.58.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "rebrowser-playwright": "^1.52.0"
+  }
+}
