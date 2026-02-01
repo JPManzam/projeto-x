@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import productData from './products.json';
 
 // Mock data content for legal pages to keep the file clean
 const LEGAL_CONTENT = {
@@ -21,23 +22,13 @@ const LEGAL_CONTENT = {
 };
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(productData);
+  const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [activeModal, setActiveModal] = useState(null);
 
   // Categories based on common output
   const categories = ['Todos', 'Tecnologia', 'Fitness', 'Casa', 'Lifestyle'];
-
-  useEffect(() => {
-    fetch('http://localhost:3001/api/logs')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setProducts(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
 
   const openModal = (type) => (e) => {
     e.preventDefault();
