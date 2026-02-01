@@ -4,8 +4,10 @@
 | :--- | :--- | :--- | :--- |
 | 1.1 | 31/01/2026 | Mary (Business Analyst) | Validado |
 | 1.2 | 31/01/2026 | Mary (Business Analyst) | Atualizado (Stealth & Infra) |
-| 1.3 | 31/01/2026 | Mary (Business Analyst) | **Consolidado** (Proxies, Spintax, KPIs) |
+| 1.3 | 31/01/2026 | Mary (Business Analyst) | Consolidado (Proxies, Spintax, KPIs) |
+| 1.4 | 01/02/2026 | Mary (Business Analyst) & Sally (UX) | 
 
+**Atualizado (Alinhamento UX/UI Fluent)** |
 
 ## 1. Introdução
 
@@ -38,11 +40,11 @@ Criar uma plataforma centralizada ("Painel de Controle") para gerenciar múltipl
 ### 3.1 Painel de Controle (Web)
 | ID | Funcionalidade | Descrição | Prioridade |
 | :--- | :--- | :--- | :--- |
-| **FR-01** | Dashboard de Status | Visualização em cards de todos os bots com status: *Varrendo, Aguardando, Postando, Erro, Em Pausa*. | P0 (MVP) |
-| **FR-02** | CRUD de Bots | Criar/Editar/Excluir bots. Configurar: Nome, Token Telegram, Channel ID, Persona (Templates/Spintax). | P0 (MVP) |
+| **FR-01** | Dashboard de Status | Visualização (Home) com widgets de resumo: Aprovações Pendentes e Performance Gráfica. | P0 (MVP) |
+| **FR-02** | CRUD de Bots | Gerenciamento em Lista (Data Grid) com status, última varredura e ações rápidas (Pausar/Excluir). | P0 (MVP) |
 | **FR-03** | Configuração de Agendamento | Definir intervalo de varredura por bot (ex: 8h, 12h, 24h) para controle de requisições. | P0 (MVP) |
 | **FR-04** | Gestão de Credenciais | Interface segura para inserir credenciais (Login Shopee/Ali, Tokens de Bot). | P0 (MVP) |
-| **FR-05** | Fila de Aprovação | Interface para listar produtos com desconto > 80% (trava de segurança) e permitir "Aprovar" ou "Rejeitar". Inclui TTL de 12h (expiração automática). | P0 (MVP) |
+| **FR-05** | Approval Center | Grid visual de produtos com desconto > 80% (trava de segurança). Permite seleção múltipla para Aprovar/Rejeitar. | P0 (MVP) |
 | **FR-06** | Analytics Básico | Gráfico de cliques por link/bot (integração futura com encurtador ou analytics do telegram). | P1 |
 | **FR-06b** | Gestão de Proxies | Interface para adicionar e rotacionar proxies residenciais/4G. Obrigatório para evitar bloqueio de IP do Data Center Oracle. | P0 (MVP) |
 
@@ -72,9 +74,26 @@ Criar uma plataforma centralizada ("Painel de Controle") para gerenciar múltipl
 ---
 
 ## 5. User Interface (UI) - Diretrizes
-- **Estilo:** Dark Mode (Cyberpunk/Tech mood).
-- **Feedback:** Indicadores visuais pulsantes para bots ativos.
-- **Responsividade:** Painel deve funcionar bem em mobile para gestão em trânsito.
+
+**Fonte da Verdade:** `docs/ux-design.md`
+
+### 5.1 Conceito Visual
+- **Design System:** **Microsoft Fluent Design 2** (Estilo Windows 11 Nativo).
+- **Filosofia:** "Familiaridade e Memória Muscular". A aplicação deve parecer uma extensão nativa do SO.
+- **Materiais:** Uso extensivo de efeito **Mica** (fundo translúcido adaptativo) e **Acrylic**.
+- **Cores:** Paleta sóbria baseada em *Windows Blue* (`#0067C0`) apenas para ações. Fundo adaptativo ao tema (Light/Dark).
+
+### 5.2 Componentes e Layout
+- **Navegação:** Pane Lateral Esquerda (Navigation Pane) padrão.
+- **Tipografia:** `Segoe UI Variable` (Fonte nativa do Windows).
+- **Ícones:** `Fluent System Icons` (Lineares).
+- **Feedback:** Sutileza é chave. Badges e status devem ser minimalistas (dots coloridos, não etiquetas gritantes).
+
+### 5.3 Telas Principais
+1.  **Home (Dashboard):** Seção Hero com saudação e widgets de resumo (Aprovações pendentes, Performance). Estilo "Configurações do Windows".
+2.  **Lista de Bots:** Data Grid (Tabela) limpa, semelhante ao Gerenciador de Arquivos (Modo Detalhes).
+3.  **Approval Center:** Grid de imagens (Galeria) com seleção múltipla (checkboxes estilo Windows Explorer) e barra de ações flutuante.
+4.  **Configurações:** Layout idêntico ao painel de configurações do sistema operacional.
 
 ---
 
@@ -98,17 +117,17 @@ Criar uma plataforma centralizada ("Painel de Controle") para gerenciar múltipl
 ### MVP (4 semanas) - Após Validação do POC
 1.  **Semana 1:** Ambiente Docker ARM64 + Motor de Scraping (Playwright) para Shopee/AliExpress.
 2.  **Semana 2:** Backend de Filas (Throttling) + Integração Telegram Bot.
-3.  **Semana 3:** Frontend (Dashboard + Config) + Integração com Backend.
+3.  **Semana 3:** Frontend (Fluent UI React) + Integração com Backend.
 4.  **Semana 4:** Testes de Carga (Rate Limits) + Deploy Oracle Cloud.
 
 ## 7. Questões Resolvidas
 | Questão | Decisão |
 |---------|---------|
 | Ferramenta de Scraping | ✅ **Playwright (Patched/Stealth)** - Docker ARM64 oficial |
+| Framework de UI | ✅ **Fluent UI React v9** (Microsoft) - Substituiu a ideia inicial |
+| Estilo Visual | ✅ **Windows 11 Mica/Native** - Substituiu "Cyberpunk" |
 | Sintaxe de Templates | ✅ **Spintax** - Simplicidade para MVP, migração para OpenAI na Fase 3 |
 | Tracking de Cliques | ✅ **Telegram Analytics** nativo |
-| Recebimento de Conversões | ✅ **Webhook** dos programas de afiliados |
-| Meta de Conversão | ✅ **20%** (2 compras a cada 10 cliques) |
 
 ---
 
