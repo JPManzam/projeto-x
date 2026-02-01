@@ -240,11 +240,6 @@ function App() {
             <button className="link-btn" onClick={() => setActiveCategory('Fitness')}>Fitness</button>
             <button className="link-btn" onClick={() => setActiveCategory('Casa')}>Casa</button>
           </div>
-          <div className="footer-column">
-            <h4>Contato</h4>
-            <a href="mailto:contato@techselect.com.br">contato@techselect.com.br</a>
-            <a href="#">Atendimento</a>
-          </div>
         </div>
 
         <div className="footer-bottom">
